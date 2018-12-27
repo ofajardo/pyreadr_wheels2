@@ -1,0 +1,63 @@
+env:
+  global:
+  - REPO_DIR="pyreadr"
+  - BUILD_COMMIT=be4a941066959630bec53961942bdbabd076ea26
+  - PLAT=x86_64
+  - UNICODE_WIDTH=32
+  - NUMJOBS=8
+  - secure: rjRULTWxcjisidWjyC7wSKnnLUO78Kthi6/A8l2WTjHe9bv+zWxjoqZpTSq6OR40Vzdf78CGyIeCu/dghSi3RaoGpcQ9nF2hZrLVt+r/Oj3BW5IToD4wj87pglUnmRpHY/l5kkYHwuGCs+gwjtI8Gu9C+DeGaVsBbfqQVyP+ujFLU3yE52/zffPq3y7rvbCwl/pfC75uw8sBWM+AQgBOd0WTghrO7+bxbsu3/3IXfgLINHufntK5scMOpWxr9f1PX9tnv/CEZsFP7q1t1bKngNwKjWUYIaeiSRRZ0JZblFy8KM4PxHlyytFOY+rEyBz/4irlVHJgLktmWS9RzIk+y/EHRtN1ajuNnxCNOCbOKMPcuRlho2by0f0YzOSsXSCbz5oXVwQoY2Oil0wo5Q/RhABkHz4onV8wsVt8qnILYl2di2MOsT3ceLaagk0B6Fp/Vts9MLOB6vxeCQBLtzM7/DGCxOMb0uv1iP61grXGdSndtRk8WffgVJ9csduHNw3OtGRYfMQayvrASI/Ef+s989gRaLDQ/ZuIurkNdlzYJjmcfVDVv4b+UuKqb/nt6QbY/zcvHbBaqECvsqmgglyPF8zHPcXxow8J0YIAdhqViVAqNx4c+aJLB7J9G9/or/ZOGOdBx65R2ACq6UhC1NPNRgbO5cD7FXgbuoSik5Wbx0Q=
+
+language: python
+python: 3.5
+sudo: required
+dist: trusty
+services: docker
+matrix:
+  exclude:
+  - python: 3.5
+  include:
+  - os: linux
+    env:
+    - MB_PYTHON_VERSION=3.5
+  - os: linux
+    env:
+    - MB_PYTHON_VERSION=3.5
+    - PLAT=i686
+  - os: linux
+    env:
+    - MB_PYTHON_VERSION=3.6
+  - os: linux
+    env:
+    - MB_PYTHON_VERSION=3.6
+    - PLAT=i686
+  - os: linux
+    env:
+    - MB_PYTHON_VERSION=3.7
+  - os: osx
+    language: generic
+    env:
+    - MB_PYTHON_VERSION=3.5
+  - os: osx
+    language: generic
+    env:
+    - MB_PYTHON_VERSION=3.6
+  - os: osx
+    language: generic
+    env:
+    - MB_PYTHON_VERSION=3.7
+before_install:
+- BUILD_DEPENDS="Cython pandas"
+- TEST_DEPENDS="pandas"
+- source multibuild/common_utils.sh
+- source multibuild/travis_steps.sh
+- before_install
+install:
+- clean_code $REPO_DIR $BUILD_COMMIT
+- build_wheel $REPO_DIR $PLAT
+script:
+- install_run $PLAT
+after_success:
+- mkdir wheels
+- cp ${TRAVIS_BUILD_DIR}/wheelhouse/* wheels
+- ls -l .
+- "./push.sh"
