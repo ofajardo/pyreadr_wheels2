@@ -22,8 +22,8 @@ upload_files() {
 
 echo "Travis JOb: $TRAVIS_JOB_NUMBER"
 numjob=$(echo $TRAVIS_JOB_NUMBER | cut -d'.' -f2)
-echo "sleeping $((($numjob-1)*60))"
-sleep $((($numjob-1)*10))
+echo "sleeping $((($numjob-1)*60))" 
+sleep $((($numjob-1)*10)) # does not seem to have any effect.
   setup_git
   commit_website_files
   upload_files
