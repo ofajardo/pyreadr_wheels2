@@ -1,7 +1,7 @@
 env:
   global:
   - REPO_DIR="pyreadr"
-  - BUILD_COMMIT=d32bf3fddc6ff1d66980cd2b53d5ee284d4ebe84
+  - BUILD_COMMIT=2f906abd7d2ac3ed9e6dec50203d39f6b0790bcd
   - PLAT=x86_64
   - UNICODE_WIDTH=32
   - NUMJOBS=8
