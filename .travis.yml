@@ -1,7 +1,7 @@
 env:
   global:
   - REPO_DIR="pyreadr"
-  - BUILD_COMMIT=2f906abd7d2ac3ed9e6dec50203d39f6b0790bcd
+  - BUILD_COMMIT=5ca3427b2938e3e78552096b0707f793f12f4fae
   - PLAT=x86_64
   - UNICODE_WIDTH=32
   - NUMJOBS=8
@@ -32,6 +32,9 @@ matrix:
   - os: linux
     env:
     - MB_PYTHON_VERSION=3.7
+  - os: linux
+    env:
+    - MB_PYTHON_VERSION=3.8
   - os: osx
     language: generic
     env:
@@ -44,9 +47,13 @@ matrix:
     language: generic
     env:
     - MB_PYTHON_VERSION=3.7
+  - os: osx
+    language: generic
+    env:
+    - MB_PYTHON_VERSION=3.8
 before_install:
-- BUILD_DEPENDS="Cython pandas"
-- TEST_DEPENDS="pandas"
+- BUILD_DEPENDS="Cython"
+#- TEST_DEPENDS="pandas"
 - source multibuild/common_utils.sh
 - source multibuild/travis_steps.sh
 - before_install
