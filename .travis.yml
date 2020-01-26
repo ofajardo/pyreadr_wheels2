@@ -52,8 +52,8 @@ matrix:
     env:
     - MB_PYTHON_VERSION=3.8
 before_install:
-- BUILD_DEPENDS="Cython pandas"
-- TEST_DEPENDS="pandas"
+- BUILD_DEPENDS="Cython"
+#- TEST_DEPENDS="pandas"
 - source multibuild/common_utils.sh
 - source multibuild/travis_steps.sh
 - before_install
