@@ -17,37 +17,8 @@ matrix:
   include:
   - os: linux
     env:
-    - MB_PYTHON_VERSION=3.5
-  - os: linux
-    env:
-    - MB_PYTHON_VERSION=3.5
-    - PLAT=i686
-  - os: linux
-    env:
-    - MB_PYTHON_VERSION=3.6
-  - os: linux
-    env:
-    - MB_PYTHON_VERSION=3.6
-    - PLAT=i686
-  - os: linux
-    env:
-    - MB_PYTHON_VERSION=3.7
-  - os: linux
-    env:
     - MB_PYTHON_VERSION=3.8
-  - os: osx
-    language: generic
-    env:
-    - MB_PYTHON_VERSION=3.5
-  - os: osx
-    language: generic
-    env:
-    - MB_PYTHON_VERSION=3.6
-  - os: osx
-    language: generic
-    env:
-    - MB_PYTHON_VERSION=3.7
-  - os: osx
+ - os: osx
     language: generic
     env:
     - MB_PYTHON_VERSION=3.8
@@ -66,4 +37,4 @@ after_success:
 - mkdir wheels
 - cp ${TRAVIS_BUILD_DIR}/wheelhouse/* wheels
 - ls -l .
-- "./push.sh"
+#- "./push.sh"
