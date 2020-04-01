@@ -13,15 +13,19 @@ environment:
     # The list here is complete (excluding Python 2.6, which
     # isn't covered by this document) at the time of writing.
 
-    - PYTHON: C:\Python38-x64
+    - PYTHON: C:\Python37
+    #- PYTHON: C:\Python38-x64
     #- PYTHON: C:\Python38
-    - PYTHON: C:\Python37-x64
+    #- PYTHON: C:\Python37-x64
     #- PYTHON: C:\Python37
-    - PYTHON: C:\Python36-x64
+    #- PYTHON: C:\Python36-x64
     #- PYTHON: C:\Python36
-    - PYTHON: C:\Python35-x64
+    #- PYTHON: C:\Python35-x64
     #- PYTHON: C:\Python35
     #- PYTHON: C:\Python27-x64
+
+platform:
+    - x86
 
 install:
   - git submodule update --init
@@ -37,7 +41,7 @@ install:
   # Fix MSVC builds for 64-bit Python
   # See
   # http://stackoverflow.com/questions/32091593/cannot-install-windows-sdk-7-1-on-windows-10
-  - echo "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 > "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\amd64/vcvars64.bat"
+  #- echo "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64 > "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\amd64/vcvars64.bat"
 
   # Check that we have the expected version and architecture for Python
   - python --version
