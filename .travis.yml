@@ -1,11 +1,11 @@
 env:
   global:
-      - REPO_DIR="pyreadr"
-      - BUILD_COMMIT=02c5c496e5a49576e2dc985ef2a7cd43ececf456
-      - PLAT=x86_64
-      - UNICODE_WIDTH=32
-      - ANACONDA_ORG=ofajardo
-      - ANACONDA_ORG_TOKEN=$ANACONDA_TOKEN
+    - REPO_DIR="pyreadr"
+    - BUILD_COMMIT=02c5c496e5a49576e2dc985ef2a7cd43ececf456
+    - PLAT=x86_64
+    - UNICODE_WIDTH=32
+    - ANACONDA_ORG=ofajardo
+    - ANACONDA_ORG_TOKEN=$ANACONDA_TOKEN
 
 language: python
 # Default Python version is usually 2.7
@@ -16,7 +16,7 @@ services: docker
 
 matrix:
   include:
-   - os: linux
+    - os: linux
       env:
         - MB_PYTHON_VERSION=3.5
     - os: linux
@@ -44,7 +44,7 @@ matrix:
       env:
         - MB_PYTHON_VERSION=3.8
         - PLAT=i686
-   - os: osx
+    - os: osx
       language: generic
       env:
         - MB_PYTHON_VERSION=3.5
@@ -83,4 +83,3 @@ after_success:
     # install anaconda client from github as the version on pypi is too old
     - pip install git+https://github.com/Anaconda-Platform/anaconda-client
     - anaconda -t $ANACONDA_ORG_TOKEN upload --force -u $ANACONDA_ORG ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl
-
