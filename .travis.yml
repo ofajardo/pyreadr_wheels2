@@ -4,13 +4,15 @@ env:
   - BUILD_COMMIT=02c5c496e5a49576e2dc985ef2a7cd43ececf456
   - PLAT=x86_64
   - UNICODE_WIDTH=32
-  - NUMJOBS=8
-  - secure: ZDpwOn2nXS2cWoX5LRQRrHLO+CFB2UhFF949RjBeZR0BkcBuMFGwsa8dq9tL9nG2dbCwPcU8Byn2P+Zu1wiimHFWNwImVWUqrpDam7cAHeltaugqDkaCIDgf/H2LH2s+xYGT5CvrFEKJaiv7vj3vbhHlUm1EV7Ub4Of7seh8zSqrRLNP3WJzCNNQoirBWcaEuFhxE/96IXATshpx6UWJPu3EuJ/GkO/7DPNvLPWUrDAR07J5rquyEy4MQF/UG+fQsoLeUF6Vzm2GYqcXKi4teS1KO8xNj6NptbXvlX8lKSj7pntPcGdd4TbMg0EkLOhA0HPzPV0KkgK3NuqrWLa9acPv3JeKAc92ejdxT7o1232KVVJ6Y2M3NiJI6z7MejsC+lNFhVXLCufDs6aW8IOXpWApMAZ82HI6U/TNw7CgQjxgG+VhNaHihD3NEuLmbFCp1HTgxGu2JMuVTckdE8cm5BsOYNfVxoXgLivnonQKjRY9NmADq6wRb7+TzXBEg70UAXF3Rlv9sLDEV8nlhdLh/ov2rI93aS/Sq9faCv62veVFZeotKvrYuXP6NsgAM89bz7bZ2vp6BM0R7A/KuZRKqj4/AOTVMT90b+IshKpkrDAbNUTHny962EYNJaHacdIOlZCKOE5DwzUSD0PtBvJCjePKy05MrGwkY1XjZvd5r5s=
+  - ANACONDA_ORG=ofajardo
+  - ANACONDA_ORG_TOKEN=$ANACONDA_TOKEN
+  
 language: python
 python: 3.5
 sudo: required
 dist: trusty
 services: docker
+
 matrix:
   exclude:
   - python: 3.5
@@ -22,19 +24,26 @@ matrix:
     language: generic
     env:
     - MB_PYTHON_VERSION=3.8
+
 before_install:
 - BUILD_DEPENDS="Cython"
 #- TEST_DEPENDS="pandas"
 - source multibuild/common_utils.sh
 - source multibuild/travis_steps.sh
 - before_install
+
 install:
 - clean_code $REPO_DIR $BUILD_COMMIT
 - build_wheel $REPO_DIR $PLAT
+
 script:
 - install_run $PLAT
+
 after_success:
-- mkdir wheels
-- cp ${TRAVIS_BUILD_DIR}/wheelhouse/* wheels
-- ls -l .
-#- "./push.sh"
+    # upload to anaconda cloud
+    - python --version
+    - ls ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl
+    # install anaconda client from github as the version on pypi is too old
+    - pip install git+https://github.com/Anaconda-Platform/anaconda-client
+    - anaconda -t $ANACONDA_ORG_TOKEN upload --force -u $ANACONDA_ORG ${TRAVIS_BUILD_DIR}/wheelhouse/*.whl
+
