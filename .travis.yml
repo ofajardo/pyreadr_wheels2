@@ -16,14 +16,7 @@ services: docker
 
 matrix:
   include:
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=2.7
-        - PLAT=i686
-    - os: linux
+   - os: linux
       env:
         - MB_PYTHON_VERSION=3.5
     - os: linux
@@ -51,10 +44,7 @@ matrix:
       env:
         - MB_PYTHON_VERSION=3.8
         - PLAT=i686
-    - os: osx
-      language: generic
-      env: MB_PYTHON_VERSION=2.7
-    - os: osx
+   - os: osx
       language: generic
       env:
         - MB_PYTHON_VERSION=3.5
