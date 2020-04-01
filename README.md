@@ -2,18 +2,23 @@
 
 This is a modification of 
 [multibuild](https://github.com/matthew-brett/multibuild/tree/005ace6325a4eff7f2cc9d09e5f8d1da134be40d)
-to build many-linux and macos wheels for pyreadr on travis-ci. 
-At the moment pyreadr has appveyor, so that one is not done here.
+to build many-linux and macos wheels for pyreadr on travis-ci and appveyor.
 
-Not all enviroments compiled (for instance python 2.7 does not work), 
+Not all enviroments compiled (for instance python 2.7 does not work, 32 bit doesn't work on appveyor), 
 so in the yaml I only kept those that were OK.
 
 It was setup following the instructions on the multibuild README in the
 section "How to use these scripts".
 
 The difference with the original version of multibuild is that this one
-deploys the wheels back to this github repo instead of that rackspace
-(as I don't have access there). In
+deploys the wheels to Anaconda Cloud instaead of Rackspace as the former is going to dissapear.
+
+In order to do that a anaconda cloud account had to be set and the token retrived via WEB UI (also possible with CLI), set the Token in Travis and APPVEYOR as secret environment variable for the project, and then just upload the wheels using the Anaconda-client in .travis.yml and appveyor.yml. Interestingly as we are using plain python and not anaconda in both appveyour and travis, I had to install Anaconda-cli from github as the pypi version was too old and was causing errors.
+
+The wheels are then visible in https://anaconda.org/ofajardo/pyreadr
+
+
+In the past wheels were written back to this github repo instead. In
 order to do that, the custom bash push.sh script was written (instead of using
 the built in travis -ci deploy method, I just could not get it to work
 properly in a reasonable amount of time). This idea comes from 
@@ -27,7 +32,6 @@ not enough privileges or something like that because it wants you to use
 the --pro flag which is only for paid accounts), also use the message 
 -m "[skip ci]" when commiting in order not to trigger a travis build, 
 otherwise the push will trigger a build and will go into an infinite loop. 
-
 This approach works well in general, the only possible problem being if
 two jobs finish at the very same time and try to commit and push at the
 same time into github, a race problem arises.
