@@ -1,7 +1,7 @@
 env:
   global:
     - REPO_DIR="pyreadr"
-    - BUILD_COMMIT=4a88b33c2a421f50373fdea3d5319fd1238b4d7d
+    - BUILD_COMMIT=b857066aabbed2849880a3f9c96f29028fb068bf
     - PLAT=x86_64
     - UNICODE_WIDTH=32
     - ANACONDA_ORG=ofajardo
