@@ -9,7 +9,7 @@ env:
 
 language: python
 # Default Python version is usually 2.7
-python: 3.5
+# python: 3.5
 sudo: required
 dist: bionic
 services: docker
@@ -18,13 +18,6 @@ matrix:
   include:
     - os: linux
       env:
-        - MB_PYTHON_VERSION=3.5
-    - os: linux
-      env:
-        - MB_PYTHON_VERSION=3.5
-        - PLAT=i686
-    - os: linux
-      env:
         - MB_PYTHON_VERSION=3.6
     - os: linux
       env:
@@ -44,10 +37,6 @@ matrix:
       env:
         - MB_PYTHON_VERSION=3.8
         - PLAT=i686
-    - os: osx
-      language: generic
-      env:
-        - MB_PYTHON_VERSION=3.5
     - os: osx
       language: generic
       env:
