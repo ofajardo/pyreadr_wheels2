@@ -5,7 +5,8 @@ function pre_build {
     # Any stuff that you need to do before you start building the wheels
     # Runs in the root directory of this repository.
     build_zlib
-	build_bzip2
+    build_bzip2
+    build_xz
 }
 
 function run_tests {
