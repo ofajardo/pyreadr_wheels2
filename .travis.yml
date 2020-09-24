@@ -1,7 +1,7 @@
 env:
   global:
     - REPO_DIR="pyreadr"
-    - BUILD_COMMIT=c89a6fecb7863e410f8042290874b0e834c4a15e
+    - BUILD_COMMIT=e327821faa8f4515540e4331e6f64e26360b00d6
     - PLAT=x86_64
     - UNICODE_WIDTH=32
     - ANACONDA_ORG=ofajardo
@@ -59,6 +59,7 @@ before_install:
 
 install:
     # Maybe get and clean and patch source
+    - echo $(gcc --version)
     - clean_code $REPO_DIR $BUILD_COMMIT
     - build_wheel $REPO_DIR $PLAT
 
