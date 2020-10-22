@@ -1,7 +1,7 @@
 env:
   global:
     - REPO_DIR="pyreadr"
-    - BUILD_COMMIT=e327821faa8f4515540e4331e6f64e26360b00d6
+    - BUILD_COMMIT=e278ef6cbb58db8a89cc7b1e853b83893ce2b2c9
     - PLAT=x86_64
     - UNICODE_WIDTH=32
     - ANACONDA_ORG=ofajardo
@@ -21,6 +21,7 @@ matrix:
         - MB_PYTHON_VERSION=3.6
     - os: linux
       env:
+
         - MB_PYTHON_VERSION=3.6
         - PLAT=i686
     - os: linux
