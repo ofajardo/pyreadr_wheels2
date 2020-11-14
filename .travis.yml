@@ -11,7 +11,8 @@ language: python
 # Default Python version is usually 2.7
 # python: 3.5
 sudo: required
-dist: bionic
+#dist: bionic
+dist: xenial
 services: docker
 
 matrix:
